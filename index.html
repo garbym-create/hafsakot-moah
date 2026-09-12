@@ -1,9 +1,19 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="43 כרטיסי הפסקות מוח לכיתה, בעברית. להקרנה על הלוח ולהדפסה.">
 <title>הפסקות מוח</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Assistant:wght@400;600;700&display=swap">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
 <style>
+  html{color-scheme:light dark}
+  img{max-width:100%}
+  [hidden]{display:none !important}
+
   :root{
     --paper:#EFECE4;
     --paper-2:#E4E0D5;
@@ -459,7 +469,8 @@
     .timerpick{width:100%;justify-content:center}
   }
 </style>
-
+</head>
+<body>
 <div class="wrap">
   <header>
     <div>
@@ -1126,3 +1137,5 @@ document.getElementById("next").onclick = () => go(1);
 renderPicker();
 show(Math.floor(Math.random()*CARDS.length));
 </script>
+</body>
+</html>
