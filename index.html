@@ -1,0 +1,1126 @@
+<title>הפסקות מוח</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Assistant:wght@400;600;700&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+<style>
+  :root{
+    --paper:#EFECE4;
+    --paper-2:#E4E0D5;
+    --sheet:#FBF9F4;
+    --ink:#232B2E;
+    --ink-soft:#6A7377;
+    --line:#D3CEC2;
+
+    --calm:#0D7F86;
+    --focus:#5B45B0;
+    --charge:#D2542A;
+    --connect:#B62F63;
+
+    --k:#0D7F86;
+    --on-color:#FFFFFF;
+    --shadow:34, 40, 44;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#12181B;
+      --paper-2:#1B2327;
+      --sheet:#F7F5EF;
+      --ink:#EDF0EC;
+      --ink-soft:#96A1A3;
+      --line:#2C3639;
+      --calm:#14929B;
+      --focus:#7A61D6;
+      --charge:#E06238;
+      --connect:#CF4076;
+      --shadow:0, 0, 0;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#12181B;
+    --paper-2:#1B2327;
+    --sheet:#F7F5EF;
+    --ink:#EDF0EC;
+    --ink-soft:#96A1A3;
+    --line:#2C3639;
+    --calm:#14929B;
+    --focus:#7A61D6;
+    --charge:#E06238;
+    --connect:#CF4076;
+    --shadow:0, 0, 0;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;direction:rtl;background:var(--paper);color:var(--ink);
+    font-family:"Assistant",-apple-system,"Segoe UI",Arial,sans-serif;font-size:17px;line-height:1.6;
+  }
+  .wrap{max-width:1140px;margin:0 auto;padding:30px 22px 84px}
+
+  /* ---------------- header ---------------- */
+  header{display:flex;justify-content:space-between;align-items:flex-end;gap:22px;flex-wrap:wrap;margin-bottom:22px}
+  h1{
+    font-family:"Fredoka","Assistant",Arial,sans-serif;font-weight:600;margin:0;
+    font-size:clamp(36px,6.6vw,60px);line-height:1;letter-spacing:-.015em;
+  }
+  h1 em{font-style:normal;color:var(--charge)}
+  .lab{
+    font-family:"Fredoka","Assistant",Arial,sans-serif;font-weight:500;
+    font-size:14.5px;color:var(--ink-soft);margin:8px 0 0;
+  }
+  .credit{font-size:12.5px;line-height:1.6;color:var(--ink-soft);max-width:36ch}
+  .credit a{color:inherit;text-decoration-thickness:1px;text-underline-offset:2px}
+  .credit a:hover{color:var(--charge)}
+
+  /* ---------------- tabs ---------------- */
+  .tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px;border-bottom:1.5px solid var(--line);padding-bottom:0}
+  .tab{
+    font:inherit;font-family:"Fredoka","Assistant",Arial,sans-serif;font-weight:500;font-size:16px;
+    cursor:pointer;background:transparent;border:none;color:var(--ink-soft);
+    padding:9px 16px;border-radius:10px 10px 0 0;position:relative;top:1.5px;
+    border-bottom:3px solid transparent;
+  }
+  .tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--k);background:var(--paper-2)}
+
+  /* ---------------- teacher note ---------------- */
+  .note{
+    background:#FFFFFF;color:#232B2E;border-radius:20px;padding:20px 24px;margin-bottom:26px;
+    border:1px solid var(--line);
+  }
+  .note p{color:#3D474B}
+  .note h2,.note strong,.note q{color:#232B2E}
+  .note h2{
+    font-family:"Fredoka","Assistant",Arial,sans-serif;font-weight:600;margin:0 0 8px;
+    font-size:20px;line-height:1.25;
+  }
+  .note p{margin:0 0 10px;font-size:15.5px;line-height:1.65;max-width:76ch}
+  .note p:last-of-type{margin-bottom:0}
+  .note q{font-style:normal;font-weight:600}
+  .note.wide{max-width:820px}
+  .note.wide p{max-width:none}
+  .note .quip{color:inherit}
+  .note .quip .emo{font-size:17px;line-height:1}
+  .states{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;max-width:820px}
+  .stateCard{
+    background:#FFFFFF;color:#232B2E;border:1px solid var(--line);
+    border-inline-start:6px solid var(--c);border-radius:14px;padding:15px 17px;
+  }
+  .stateCard h4{
+    font-family:"Fredoka","Assistant",Arial,sans-serif;font-weight:600;margin:0 0 4px;
+    font-size:19px;color:var(--c);
+  }
+  .stateCard p{margin:0;font-size:14px;line-height:1.5;color:#4F595C}
+  .stateCard .cnt{font-size:12.5px;color:#77817F;display:block;margin-top:7px}
+
+  .joinbtn{
+    display:inline-flex;align-items:center;gap:8px;margin-top:16px;text-decoration:none;
+    font-family:"Fredoka","Assistant",Arial,sans-serif;font-weight:500;font-size:14.5px;
+    color:var(--connect);background:transparent;
+    border:1.5px solid color-mix(in srgb, var(--connect) 38%, #FFF);
+    border-radius:9px;padding:6px 14px;
+    transition:background .15s,border-color .15s;
+  }
+  .joinbtn .arw{font-size:13px;opacity:.7;line-height:1}
+  .joinbtn:hover{
+    background:color-mix(in srgb, var(--connect) 8%, #FFF);
+    border-color:var(--connect);
+  }
+
+  /* ---------------- projection mode ---------------- */
+  .btn.beam{border-color:var(--k);color:var(--k);font-weight:500}
+  .beambar{display:none}
+
+  body.beaming{overflow:hidden}
+  body.beaming .wrap{max-width:none;padding:0}
+  body.beaming header,
+  body.beaming .tabs,
+  body.beaming .ask,
+  body.beaming .picker,
+  body.beaming .scope,
+  body.beaming .controls,
+  body.beaming .fallback-note{display:none !important}
+
+  body.beaming #view-one{
+    position:fixed;inset:0;z-index:60;background:var(--paper);
+    display:flex;flex-direction:column;padding:2.4vh 2.4vw 0;
+  }
+  body.beaming .stage{flex:1;min-height:0;margin:0;display:flex}
+  body.beaming .stage::before{display:none}
+  body.beaming .card{
+    flex:1;display:flex;flex-direction:column;border-radius:24px;
+    padding:2.2vh 2.4vw;box-shadow:none;min-height:0;
+  }
+  body.beaming .card-top{margin-bottom:1vh}
+  body.beaming .num,body.beaming .state{font-size:clamp(16px,1.7vw,26px)}
+  body.beaming .type,body.beaming .idx{font-size:clamp(14px,1.3vw,20px)}
+  body.beaming .card h2{font-size:clamp(38px,6vw,104px);margin-bottom:1.4vh}
+  body.beaming .sheet{flex:1;min-height:0;overflow:auto;padding:2.2vh 2.4vw;border-radius:18px}
+  body.beaming ol.steps{gap:1.4vh}
+  body.beaming ol.steps li{font-size:clamp(20px,2.5vw,42px);padding-inline-start:2.6em;max-width:none}
+  body.beaming ol.steps li::before{width:1.7em;height:1.7em;font-size:.55em;border-radius:.34em}
+  body.beaming p.steps{font-size:clamp(20px,2.5vw,42px);max-width:none}
+  body.beaming .stripe span{font-size:clamp(14px,1.4vw,22px)}
+  body.beaming .extra,body.beaming .why{display:none}
+
+  body.beaming .beambar{
+    display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+    padding:1.4vh 0 1.8vh;justify-content:center;
+  }
+  .bb{
+    font:inherit;font-family:"Fredoka","Assistant",Arial,sans-serif;font-weight:500;
+    font-size:clamp(16px,1.5vw,22px);cursor:pointer;border-radius:12px;
+    padding:.5em 1.3em;border:2px solid var(--k);background:var(--k);color:var(--on-color);
+  }
+  .bb.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+  .bbclock{
+    font-family:"Fredoka","Assistant",Arial,sans-serif;font-weight:500;
+    font-size:clamp(26px,3vw,52px);font-variant-numeric:tabular-nums;
+    color:var(--k);min-width:3.2em;text-align:center;
+  }
+
+  /* ---------------- picker ---------------- */
+  .ask{
+    font-family:"Fredoka","Assistant",Arial,sans-serif;font-weight:500;
+    font-size:17px;margin:0 0 12px;
+  }
+  .picker{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+  .shuffle{
+    font:inherit;font-family:"Fredoka","Assistant",Arial,sans-serif;font-weight:500;font-size:16.5px;
+    cursor:pointer;border-radius:12px;padding:10px 22px;
+    border:1.5px solid var(--ink);background:var(--ink);color:var(--paper);
+    transition:transform .12s;
+  }
+  .shuffle:active{transform:translateY(2px)}
+  .divider{width:1.5px;align-self:stretch;background:var(--line);margin:0 4px}
+  .navb{
+    position:absolute;top:50%;transform:translateY(-50%);z-index:3;
+    display:grid;place-items:center;cursor:pointer;
+    width:44px;height:44px;border-radius:14px;
+    border:1.5px solid var(--line);background:var(--sheet);color:var(--k);
+    box-shadow:0 8px 18px -12px rgba(var(--shadow),.75);
+    transition:background .15s,border-color .15s,color .15s,transform .12s;
+  }
+  .navb:hover{background:var(--k);border-color:var(--k);color:var(--on-color)}
+  .navb:active{transform:translateY(-50%) scale(.93)}
+  #prev{inset-inline-start:-23px}
+  #next{inset-inline-end:-23px}
+  .pos{
+    font-family:"Fredoka","Assistant",Arial,sans-serif;font-weight:500;font-size:14px;
+    color:var(--ink-soft);font-variant-numeric:tabular-nums;text-align:center;margin:0 0 18px;
+  }
+  .chip{
+    font:inherit;font-family:"Fredoka","Assistant",Arial,sans-serif;font-weight:500;
+    font-size:15.5px;cursor:pointer;
+    border:1.5px solid var(--line);color:var(--ink-soft);background:transparent;
+    border-radius:11px;padding:8px 15px;display:flex;align-items:center;gap:8px;
+    transition:background .16s,color .16s,border-color .16s;
+  }
+  .chip .sw{width:10px;height:10px;border-radius:3px;background:var(--c);flex:none}
+  .chip .n{font-variant-numeric:tabular-nums;opacity:.65;font-size:14px}
+  .chip[aria-pressed="true"]{background:var(--c);color:var(--on-color);border-color:transparent}
+  .chip[aria-pressed="true"] .sw{background:rgba(255,255,255,.7)}
+  .chip[aria-pressed="true"] .n{opacity:.85}
+  .scope{font-size:14px;color:var(--ink-soft);margin:0 0 22px}
+
+  /* ---------------- the card ---------------- */
+  .stage{position:relative;margin-bottom:22px}
+  .stage::before{
+    content:"";position:absolute;inset:18px -6px -10px;border-radius:30px;
+    background:var(--k);opacity:.2;z-index:0;transform:rotate(-.8deg);
+  }
+  .card{
+    position:relative;z-index:1;border-radius:28px;padding:20px;
+    min-height:470px;display:flex;flex-direction:column;
+    background:var(--k);color:var(--on-color);
+    box-shadow:0 24px 44px -26px rgba(var(--shadow), .55);
+  }
+  .card .sheet{flex:1}
+  .card-top{
+    display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+    padding:2px 8px 0;margin-bottom:12px;
+  }
+  .tags{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+  .num{
+    font-family:"Fredoka","Assistant",Arial,sans-serif;font-weight:600;font-size:15px;
+    background:rgba(255,255,255,.24);border-radius:8px;padding:4px 11px;
+    font-variant-numeric:tabular-nums;
+  }
+  .state{
+    font-family:"Fredoka","Assistant",Arial,sans-serif;font-weight:500;font-size:14px;
+    background:rgba(255,255,255,.18);border-radius:8px;padding:4px 12px;
+  }
+  .type{font-size:14px;opacity:.85}
+  .idx{font-size:12.5px;opacity:.8;text-align:end;line-height:1.45}
+
+  .card h2{
+    font-family:"Fredoka","Assistant",Arial,sans-serif;font-weight:600;margin:0 0 16px;
+    padding:0 8px;
+    font-size:clamp(30px,5.4vw,50px);line-height:1.06;letter-spacing:-.015em;text-wrap:balance;
+  }
+
+  .sheet{
+    background:var(--sheet);color:#232B2E;border-radius:20px;padding:22px 24px;
+    display:flex;flex-direction:column;gap:16px;
+  }
+  .stripe{display:flex;gap:8px;flex-wrap:wrap}
+  .stripe span{
+    font-size:13.5px;font-weight:600;border-radius:7px;padding:3px 11px;
+    background:color-mix(in srgb, var(--k) 13%, #FFF);
+    color:color-mix(in srgb, var(--k) 78%, #000);
+  }
+  ol.steps{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:11px;counter-reset:st}
+  ol.steps li{
+    counter-increment:st;position:relative;padding-inline-start:36px;
+    font-size:clamp(16.5px,2vw,19px);line-height:1.6;max-width:58ch;
+  }
+  ol.steps li::before{
+    content:counter(st);position:absolute;inset-inline-start:0;top:.05em;
+    width:25px;height:25px;border-radius:8px;display:grid;place-items:center;
+    font-family:"Fredoka","Assistant",Arial,sans-serif;font-size:13.5px;font-weight:500;
+    background:var(--k);color:var(--on-color);
+  }
+  p.steps{margin:0;font-size:clamp(16.5px,2vw,19px);line-height:1.65;max-width:58ch}
+
+  .extra{
+    border-top:1px dashed color-mix(in srgb, var(--k) 32%, #FFF);
+    padding-top:14px;display:flex;flex-direction:column;gap:10px;
+  }
+  .plus{display:flex;gap:9px;align-items:flex-start;font-size:15px;line-height:1.55}
+  .plus b{
+    font-family:"Fredoka","Assistant",Arial,sans-serif;font-weight:500;flex:none;
+    color:color-mix(in srgb, var(--k) 78%, #000);
+  }
+  .why summary{
+    cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:7px;
+    font-family:"Fredoka","Assistant",Arial,sans-serif;font-weight:500;font-size:15px;
+    color:color-mix(in srgb, var(--k) 78%, #000);
+  }
+  .why summary::-webkit-details-marker{display:none}
+  .why summary::before{
+    content:"?";width:20px;height:20px;border-radius:6px;display:grid;place-items:center;
+    background:color-mix(in srgb, var(--k) 15%, #FFF);font-size:13px;
+  }
+  .why[open] summary::before{content:"\2013"}
+  .why p{margin:9px 0 0;font-size:15px;line-height:1.62;max-width:58ch;color:#3D474B}
+
+  .flip{animation:fadein .2s ease-out}
+  @keyframes fadein{from{opacity:0}to{opacity:1}}
+
+  /* ---------------- timer ---------------- */
+  .controls{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+  .btn{
+    font:inherit;font-family:"Fredoka","Assistant",Arial,sans-serif;font-weight:500;
+    font-size:15px;cursor:pointer;border-radius:12px;padding:10px 16px;
+    border:1.5px solid var(--line);background:transparent;color:var(--ink);
+    transition:transform .12s;
+  }
+  .btn:active{transform:translateY(2px)}
+  .btn[aria-pressed="true"]{background:var(--k);border-color:transparent;color:var(--on-color)}
+  .bell{
+    font:inherit;font-size:16px;line-height:1;cursor:pointer;
+    width:34px;height:34px;flex:none;border-radius:10px;
+    border:1.5px solid var(--line);background:transparent;
+  }
+  .bell:hover{border-color:var(--k)}
+  .bell[aria-pressed="false"]{opacity:.45}
+  .sep{font-size:14px;color:var(--ink-soft);margin-inline-end:4px}
+  .timerpick{
+    display:flex;align-items:center;gap:7px;flex-wrap:wrap;
+    border:1.5px solid var(--line);border-radius:14px;padding:6px 12px;
+  }
+  .tchip{
+    position:relative;font:inherit;
+    font-family:"Fredoka","Assistant",Arial,sans-serif;font-weight:500;font-size:14.5px;
+    cursor:pointer;border-radius:10px;padding:7px 13px;
+    border:1.5px solid var(--line);background:transparent;color:var(--ink);
+    transition:background .15s,border-color .15s,color .15s;
+  }
+  .tchip:hover{border-color:var(--k);color:var(--k)}
+  .tchip.rec{border-color:var(--k);color:var(--k)}
+  .tchip.rec::after{
+    content:"מומלץ";position:absolute;top:-9px;inset-inline-start:50%;
+    transform:translateX(50%);font-size:10px;font-weight:500;letter-spacing:.02em;
+    background:var(--k);color:var(--on-color);border-radius:5px;padding:1px 6px;
+    white-space:nowrap;
+  }
+  .tchip[aria-pressed="true"]{background:var(--k);border-color:var(--k);color:var(--on-color)}
+  .tchip[aria-pressed="true"]::after{background:var(--ink)}
+  .clock{
+    margin-inline-start:auto;font-family:"Fredoka","Assistant",Arial,sans-serif;font-weight:500;
+    font-size:32px;line-height:1;font-variant-numeric:tabular-nums;
+    color:var(--line);min-width:104px;text-align:center;transition:color .2s;
+  }
+  .clock.run{color:var(--k)}
+  .fallback-note{font-size:13.5px;color:var(--ink-soft);margin:0;max-width:76ch}
+  :focus-visible{outline:3px solid var(--k);outline-offset:3px;border-radius:8px}
+
+  /* ---------------- printable card sheets ---------------- */
+  .print-bar{
+    display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
+    background:var(--paper-2);border:1px solid var(--line);border-radius:16px;
+    padding:14px 18px;margin-bottom:24px;
+  }
+  .print-bar p{margin:0;font-size:14.5px;color:var(--ink-soft);max-width:60ch}
+  .print-btn{
+    font:inherit;font-family:"Fredoka","Assistant",Arial,sans-serif;font-weight:500;font-size:16px;
+    cursor:pointer;border-radius:12px;padding:10px 22px;flex:none;
+    border:1.5px solid var(--ink);background:var(--ink);color:var(--paper);
+  }
+
+  .pages{display:flex;flex-direction:column;align-items:center;gap:26px}
+  .page{
+    width:210mm;height:297mm;padding:8mm;background:#FFFFFF;flex:none;
+    display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:minmax(0,1fr) minmax(0,1fr);gap:6mm;
+    box-shadow:0 14px 30px -20px rgba(var(--shadow),.6);
+  }
+  .pcard{
+    border:1.5px dashed #B9BEB8;border-radius:5mm;padding:7mm 7mm 6mm;
+    display:flex;flex-direction:column;gap:3.2mm;overflow:hidden;
+    color:#232B2E;background:#FFFFFF;
+  }
+  .pc-top{display:flex;align-items:center;gap:2.4mm}
+  .pc-num{
+    font-family:"Fredoka","Assistant",Arial,sans-serif;font-weight:600;font-size:12px;
+    color:var(--c);border:1.4px solid var(--c);border-radius:2.2mm;padding:.6mm 2.4mm;
+    font-variant-numeric:tabular-nums;flex:none;
+  }
+  .pc-state{
+    font-family:"Fredoka","Assistant",Arial,sans-serif;font-weight:500;font-size:11.5px;
+    color:#FFFFFF;background:var(--c);border-radius:2.2mm;padding:.7mm 2.6mm;flex:none;
+    print-color-adjust:exact;-webkit-print-color-adjust:exact;
+  }
+  .pc-type{font-size:10.5px;color:#6C7573;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .pcard h3{
+    font-family:"Fredoka","Assistant",Arial,sans-serif;font-weight:600;margin:0;
+    font-size:21px;line-height:1.1;color:var(--c);text-wrap:balance;
+  }
+  .pc-meta{font-size:10.5px;color:#5E686C;margin:0;line-height:1.45}
+  .pcard ol{
+    margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:2.1mm;
+    counter-reset:pc;
+  }
+  .pcard ol li{
+    counter-increment:pc;position:relative;padding-inline-start:6.2mm;
+    font-size:12.5px;line-height:1.42;
+  }
+  .pcard ol li::before{
+    content:counter(pc) ".";position:absolute;inset-inline-start:0;top:0;
+    font-family:"Fredoka","Assistant",Arial,sans-serif;font-weight:500;
+    font-size:12px;color:var(--c);
+  }
+  .pcard .pline{margin:0;font-size:12.5px;line-height:1.45}
+  .pc-plus{margin:0;font-size:10.5px;line-height:1.4;color:#4F595C}
+  .pc-plus b,.pc-why b{font-family:"Fredoka","Assistant",Arial,sans-serif;font-weight:500;color:var(--c)}
+  .pc-why{
+    margin:auto 0 0;padding-top:2.4mm;border-top:1px solid #E2E0D8;
+    font-size:10px;line-height:1.4;color:#5A6467;
+  }
+  .pc-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:3mm;margin-top:1mm}
+  .pc-foot .txt{display:flex;flex-direction:column;gap:.6mm;min-width:0}
+  .pc-src{font-size:8.5px;color:#8A928F;margin:0}
+  .pc-scan{font-size:9px;color:#5E686C;margin:0;line-height:1.25}
+  .qr{width:14mm;height:14mm;flex:none;display:block}
+  .qr[hidden]{display:none}
+
+  @page{size:A4;margin:0}
+  @media print{
+    body{background:#FFFFFF}
+    .wrap{max-width:none;padding:0}
+    header,.tabs,.print-bar,.note,#view-one,#view-how,#view-about,.beambar{display:none !important}
+    #view-all,#view-all[hidden]{display:block !important}
+    .pages{display:block}
+    .page{
+      box-shadow:none;margin:0;break-after:page;page-break-after:always;
+      width:210mm;height:297mm;
+    }
+    .page:last-child{break-after:auto;page-break-after:auto}
+    .pcard{break-inside:avoid;page-break-inside:avoid}
+  }
+
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  @media (max-width:560px){
+    .wrap{padding:20px 14px 60px}
+    .note{padding:16px 17px;border-radius:16px}
+    .card{padding:14px;border-radius:22px}
+    .sheet{padding:18px 16px;border-radius:16px}
+    .card h2{padding:0 4px}
+    .card-top{padding:2px 4px 0}
+    .clock{margin-inline-start:0;width:100%;text-align:start;font-size:28px}
+    .sep{display:none}
+    .shuffle{flex:1 1 100%;text-align:center}
+    .divider{display:none}
+    .tab{font-size:14.5px;padding:8px 11px}
+    .navb{width:38px;height:38px;font-size:18px}
+    #prev{inset-inline-start:4px}
+    #next{inset-inline-end:4px}
+    .card{padding:14px 50px;min-height:0}
+    .timerpick{width:100%;justify-content:center}
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>הפסקות <em>מוח</em></h1>
+      <p class="lab">ממעבדת הניסויים של מרי גרבי</p>
+    </div>
+    <p class="credit">
+      20 כרטיסים מתורגמים מתוך
+      <a href="https://www.weareteachers.com/wp-content/uploads/WeAreTeachers_Download_Brain-Breaks-Cards.pdf" target="_blank" rel="noopener">Brain Breaks Cards</a>
+      של We Are Teachers.<br>ועוד 23 כרטיסים ייחודיים.
+    </p>
+  </header>
+
+  <div class="tabs" role="tablist">
+    <button class="tab" id="tab-how" role="tab" aria-selected="true">איך בוחרים כרטיס</button>
+    <button class="tab" id="tab-one" role="tab" aria-selected="false">כרטיסים להקרנה על הלוח</button>
+    <button class="tab" id="tab-all" role="tab" aria-selected="false">כל הכרטיסים להדפסה</button>
+    <button class="tab" id="tab-about" role="tab" aria-selected="false">אודות</button>
+  </div>
+
+  <div id="view-how">
+    <section class="note wide">
+      <h2>איך בוחרים כרטיס, ולמה אין כאן זמן קבוע</h2>
+      <p>המתודולוגיה של We&nbsp;Are&nbsp;Teachers לא קובעת כמה זמן הפסקת מוח נמשכת ולא כל כמה זמן לעשות אותה. במקום שאלה של <q>כמה זמן</q>, היא מציבה שאלת בחירה: <q>באיזה מצב מוחי אני צריכה שהתלמידים יהיו עכשיו?</q> ומשם בוחרים כרטיס מרגיע או כרטיס ממריץ. הזמן נגזר מהמצב ומהפעילות, לא מלוח זמנים קבוע.</p>
+      <p>לכן כל כרטיס כאן נמדד ביחידות שלו: שלוש נשימות, סיבוב אחד של הכדור, גל אחד לאורך השורה. הטיימר קיים רק לכרטיסים שבהם קצוב עוזר, ואפשר להתעלם ממנו.</p>
+      <p>שלוש האפשרויות הקבועות בטיימר, 30 שניות, דקה ושתי דקות, הן סדרי הגודל היחידים שמופיעים אצל We&nbsp;Are&nbsp;Teachers עצמם. הן שימושיות כשצריך גבול ברור, לא כהמלצה למשך הפסקה.</p>
+    </section>
+
+    <div class="states" id="statesGuide"></div>
+  </div>
+
+  <div id="view-one" hidden>
+
+    <p class="ask">באיזה מצב אתם צריכים את הכיתה עכשיו?</p>
+    <div class="picker" id="picker"></div>
+    <p class="scope" id="scope"></p>
+
+    <section class="stage" id="stage" aria-live="polite">
+      <button class="navb" id="prev" title="הכרטיס הקודם" aria-label="הכרטיס הקודם"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+      <article class="card" id="card"></article>
+      <button class="navb" id="next" title="הכרטיס הבא" aria-label="הכרטיס הבא"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+    </section>
+    <p class="pos" id="pos"></p>
+
+    <div class="beambar" id="beambar" hidden>
+      <button class="bb ghost" id="bbPrev" aria-label="הכרטיס הקודם">&#8594;</button>
+      <button class="bb ghost" id="bbNext" aria-label="הכרטיס הבא">&#8592;</button>
+      <button class="bb" id="bbDraw">הגרלה</button>
+      <span class="bbclock" id="bbClock">--:--</span>
+      <button class="bb" id="bbTimer">הפעל טיימר</button>
+      <button class="bb ghost" id="bbClose">יציאה</button>
+    </div>
+
+    <div class="controls">
+      <button class="btn beam" id="beam">הקרנה על הלוח</button>
+      <div class="timerpick">
+        <span class="sep">טיימר</span>
+        <button class="tchip" data-sec="30">30 שניות</button>
+        <button class="tchip" data-sec="60">דקה</button>
+        <button class="tchip" data-sec="90">דקה וחצי</button>
+        <button class="tchip" data-sec="120">שתי דקות</button>
+        <button class="tchip" data-sec="180">שלוש דקות</button>
+        <button class="btn" id="pause" hidden>השהיה</button>
+        <button class="btn" id="stop">איפוס</button>
+        <button class="bell" id="bell" aria-pressed="true" title="צליל בסוף הטיימר">🔔</button>
+      </div>
+      <span class="clock" id="clock">--:--</span>
+    </div>
+    <p class="fallback-note">לחיצה על זמן מפעילה אותו מיד, וצלצול רך מודיע כשנגמר. אפשר להשתיק אותו בפעמון. הסימון <q>מומלץ</q> מראה את המשך שמתאים לכרטיס שעל המסך, ואפשר כמובן לבחור אחרת או לוותר על הטיימר לגמרי.</p>
+  </div>
+
+  <div id="view-about" hidden>
+    <section class="note wide">
+      <h2>למה נבנה הכלי הזה?</h2>
+      <p>החפיסה של We&nbsp;Are&nbsp;Teachers היא כלי מצוין, אבל היא באנגלית ומניחה תרבות כיתה אמריקאית. הכלי הזה נבנה כדי להנגיש את החומר למורים בעברית: לתרגם אותו, להתאים אותו לכיתות שלנו בישראל ולהרחיב אותו.</p>
+    </section>
+
+    <section class="note wide">
+      <h2>מעבדת הניסויים של מרי גרבי</h2>
+      <p>במעבדה אני משחקת בכלים ומפתחת חומרים פרקטיים לאנשי חינוך. וכשאני לא משחקת במעבדה <span class="quip">(ולא מלמדת <span class="emo">😍</span>, מדריכה <span class="emo">💕</span> או מרצה <span class="emo">🥰</span>)</span>, אני מובילה את קהילת <q>כלים ואסטרטגיות מפתחות להצלחה</q>: קהילה של מעל 4,000 אנשי ונשות חינוך, שבה משתפים כלים ואסטרטגיות, לומדים דברים חדשים ומחליפים רעיונות לכיתה.</p>
+      <a class="joinbtn" id="joinBtn" href="#" target="_blank" rel="noopener" hidden><span class="arw">←</span>לכתוב למרי ולהצטרף לקהילה</a>
+    </section>
+
+  </div>
+
+  <div id="view-all" hidden>
+    <div class="print-bar">
+      <p>ארבע כרטיסיות בכל עמוד A4, עם קווי חיתוך מקווקווים. מה שמופיע כאן הוא בדיוק מה שיֵצא מהמדפסת. לשמירה כקובץ: בחלון ההדפסה בוחרים ביעד <q>שמירה כ־PDF</q>.</p>
+      <button class="print-btn" id="printBtn">הדפסה או שמירה כ־PDF</button>
+    </div>
+    <div class="pages" id="pages"></div>
+  </div>
+</div>
+
+<script>
+const STATES = {
+  calm:   {name:"להרגיע", badge:"מרגיע", v:"--calm"},
+  focus:  {name:"למקד",   badge:"ממקד",  v:"--focus"},
+  charge: {name:"להמריץ", badge:"ממריץ", v:"--charge"},
+  connect:{name:"לגבש",   badge:"מגבש",  v:"--connect"}
+};
+
+const WAT_COUNT = 20;
+
+const CARDS = [
+  {s:"calm", ty:"נשימה", t:"לנשום כמו חיה",
+   d:"נשפו אוויר בשריקה של נחש: שששש. עכשיו נשיפה גדולה של לווייתן: ווווש. אחר כך גרגור רך של חתול. ולסיום: הרימו יד למעלה כמו חדק של פיל, ונשפו דרכו.",
+   len:"נשיפה אחת לכל חיה", sec:60,
+   p:"אילו עוד חיות מתחשק לכם להיות?",
+   w:"נשיפה ארוכה יותר מהשאיפה היא המתג הפיזיולוגי שמוריד עוררות. העטיפה כחיה הופכת הוראה מופשטת לדימוי שילד צעיר יודע לבצע מיד."},
+
+  {s:"focus", ty:"קשב", t:"אוזן־אף, החלף",
+   d:"יד ימין נוגעת באוזן שמאל, יד שמאל נוגעת באף. עכשיו מחליפים: יד שמאל לאוזן ימין, יד ימין לאף. ושוב. ושוב. כמה מהר אתם מצליחים בלי להתבלבל?",
+   len:"עד שהקצב מתייצב", sec:45,
+   w:"חציית קו האמצע של הגוף מחייבת את שתי ההמיספרות לעבוד יחד, והחילוף דורש עיכוב תגובה: בדיוק שני השרירים הקוגניטיביים שצריך כדי לחזור למשימה."},
+
+  {s:"calm", ty:"נשימה", t:"נשימה מוצלבת",
+   d:"עומדים זקוף. מצליבים רגל אחת לפני השנייה, כך שצידי כפות הרגליים נוגעים. מצליבים גם את הידיים, משלבים אצבעות ומצמידים אותן אל החזה. שלוש נשימות עמוקות. עכשיו משחררים, מצליבים לצד ההפוך, ועוד שלוש נשימות.",
+   len:"שלוש נשימות לכל צד", sec:90,
+   w:"שילוב של חציית קו האמצע עם לחץ עמוק ותנוחה מכונסת. עוזר במיוחד לילד מוצף לחזור לתחושת גבול וביטחון בגוף."},
+
+  {s:"focus", ty:"קשב", t:"אוזניים פקוחות",
+   d:"עוצמים עיניים. אני משמיעה צליל, ואתם מקשיבים לו עד שהוא נגמר. מה אתם מרגישים בגוף? האם אתם מצליחים לנשום לאט לאורך כל הצליל?",
+   len:"אורך הצליל", sec:30, g:"צליל שנמשך כחצי דקה",
+   w:"הצליל נותן לתשומת הלב עוגן חיצוני יחיד, ומאמן את המעבר מקשב מפוזר לקשב ממוקד: מיומנות שאפשר להעביר משם ישר למשימה הבאה."},
+
+  {s:"calm", ty:"מתיחה", t:"חתול ופרה",
+   d:"יורדים לארבע: ברכיים וכפות ידיים על הרצפה. מעגלים את הגב כלפי מעלה כמו חתול, ונושפים. משחררים את הגב כלפי מטה כמו פרה, ושואפים. ממשיכים בקצב שלכם.",
+   len:"שש עד שמונה חזרות", sec:60,
+   w:"משחרר את הגב, הצוואר והכתפיים אחרי ישיבה ממושכת, ומסנכרן תנועה עם נשימה כך שהגוף מרגיע את עצמו תוך כדי מתיחה."},
+
+  {s:"focus", ty:"משחק כיתתי", t:"כדור שקט",
+   d:"מעבירים כדור סביב המעגל בלי להוציא הגה ובלי להפיל אותו. בואו נראה אם נצליח להשלים סיבוב שלם בשקט מוחלט.",
+   len:"סיבוב אחד סביב המעגל", sec:90, g:"כדור קטן ורך",
+   w:"ויסות עצמי בתוך קבוצה: יש תנועה ויש ריגוש, אבל האחריות המשותפת לשקט מונעת מהאנרגיה להסלים לרעש."},
+
+  {s:"calm", ty:"מגע ונשימה", t:"ידיים חמות",
+   d:"מצמידים כפות ידיים ומשפשפים חזק ומהר. מרגישים איך הן מתחממות? עכשיו עוצמים עיניים, מניחים את כפות הידיים החמות על העיניים, ונושמים עמוק.",
+   len:"שפשוף קצר ושלוש נשימות", sec:45,
+   w:"חום ולחץ הם קלט תחושתי שמעגן את תשומת הלב בגוף. שימושי כטקס מעבר קצר וברור בין שני חלקי שיעור."},
+
+  {s:"charge", ty:"תנועה", t:"לבחוש בקלחת",
+   d:"דמיינו קלחת ענקית ובתוכה קרמל דביק וסמיך. אחזו בשתי ידיים בכף גדולה ובחשו עם כיוון השעון. הקרמל כבד: הפעילו את כל הגוף, לא רק את הידיים. ועכשיו מחליפים כיוון.",
+   len:"כחצי דקה לכל כיוון", sec:60,
+   w:"עבודת שרירים גדולים כנגד התנגדות מדומיינת נותנת קלט פרופריוצפטיבי: אותו סוג של עומס שמרגיע ילדים עם צורך גבוה בתנועה."},
+
+  {s:"charge", ty:"תנועה בכיסא", t:"איקס ועיגול",
+   d:"יושבים על הכיסא, כפות הרגליים על הרצפה והרגליים צמודות. מתכווצים לכדור קטן: זה עיגול. פותחים ידיים ורגליים לצדדים: זה איקס. עיגול. איקס. עיגול. איקס.",
+   len:"שמונה עד עשרה סיבובים", sec:45,
+   p:"בכל סיבוב מגבירים קצת את הקצב",
+   w:"התכווצות והתרחבות לסירוגין משחררות מתח שריר ומעלות עוררות בכיתה רדומה, והכול בלי לקום מהכיסא."},
+
+  {s:"focus", ty:"קשב שמיעתי", t:"מחיאה וחזרה",
+   d:"אני מוחאת כפיים במקצב, ואתם מקשיבים ומחזירים לי אותו בדיוק.",
+   len:"שלושה עד חמישה מקצבים", sec:60,
+   p:"אחרי כמה סיבובים אפשר להוסיף למקצב רקיעות ברגליים ונקישות אצבעות",
+   w:"זיכרון עבודה שמיעתי: הילד מחזיק רצף בראש ומשחזר אותו. בדרך אגב זה מחזיר את הקשב לקול המורה בלי לבקש שקט."},
+
+  {s:"charge", ty:"משחק כיתתי", t:"פופקורן",
+   d:"כולם יושבים. מתי שבא לכם: קופצים ואומרים “פּופּ”, ונשארים לעמוד. אבל אם שניים קופצים באותו רגע, כולם מתיישבים והמשחק מתחיל מהתחלה. כמה מהר נצליח לעמוד כולנו?",
+   len:"עד שכל הכיתה עומדת", sec:90,
+   w:"דורש עיכוב תגובה וקריאה של הקבוצה: כל ילד צריך להרגיש מתי לקפוץ ומתי להתאפק, וזה ויסות עצמי בתחפושת של משחק."},
+
+  {s:"focus", ty:"משחק כתיבה", t:"קטגוריות",
+   d:"מכינים יחד רשימת קטגוריות: חיות, מאכלים, ערים, מקצועות. אני בוחרת אחת, ואתם כותבים לעצמכם כמה שיותר דברים שמתאימים לה.",
+   len:"דקה לכתיבה, ואז הקראה", sec:60,
+   p:"בהקראה: כל פריט שמופיע גם אצל מישהו אחר נמחק, וכל פריט ייחודי שווה נקודה",
+   w:"שליפה מהזיכרון וגמישות מחשבתית. מחמם את החשיבה לפני משימה חדשה, ומצליח גם כשהכיתה כבר עייפה מדי לתנועה."},
+
+  {s:"calm", ty:"משחק שקט", t:"ראש למטה, אגודל למעלה",
+   d:"שבעה ילדים עומדים בחזית הכיתה. כל השאר מניחים את הראש על השולחן ומרימים אגודל אחד. השבעה עוברים בשקט בין השולחנות, וכל אחד מהם לוחץ אגודל אחד כלפי מטה. בסוף: כל מי שהאגודל שלו נלחץ מנסה לנחש מי עשה זאת.",
+   len:"סבב אחד וניחוש", sec:120,
+   w:"הפוגה שמורידה גירוי חושי: חושך, שקט, ראש מונח, ובכל זאת שומרת רגע חברתי קליל וציפייה."},
+
+  {s:"charge", ty:"פעילות גופנית", t:"מרץ בספירה לאחור",
+   d:"אני קוראת חמש פעולות, ואתם מבצעים אותן כמה שיותר מהר: חמש קפיצות ג’מפינג! ארבע שכיבות סמיכה! שלוש כפיפות בטן! שתי קפיצות סקוואט! וקפיצת כוכב אחת גדולה!",
+   len:"חמש הפעולות ברצף", sec:45,
+   w:"פרץ אירובי קצר מעלה את זרימת הדם והחמצן למוח. המחקר על פעילות גופנית בכיתה מראה שיפור בקשב בדקות שמיד אחריו."},
+
+  {s:"charge", ty:"פעילות גופנית", t:"ספירה לשיגור",
+   d:"עומדים, ואז יורדים לשפיפה עם כפות הידיים על הרצפה: מתכווצים כמו קפיץ. אני סופרת לאחור: שלוש… שתיים… אחת… שיגור! וקופצים כמה שיותר גבוה.",
+   len:"שיגור אחד, ואפשר שניים", sec:30,
+   w:"פריקת אנרגיה מרוכזת עם התחלה וסוף מוגדרים היטב, כך שהכיתה מתפרקת ומתאספת בחזרה בתוך פחות מדקה."},
+
+  {s:"charge", ty:"תנועה קבוצתית", t:"הגל",
+   d:"עומדים בשורה לרוחב הכיתה. הראשון קם, מרים ידיים מעל הראש ומתיישב, ומיד אחריו הבא בתור, וכך הגל עובר לאורך כל השורה.",
+   len:"גל אחד לאורך השורה", sec:30,
+   p:"בסיבוב השני מודדים כמה שניות לוקח לגל לחצות את הכיתה, ומנסים לשבור את השיא",
+   w:"לכל ילד יש תור ברור ותנועה קצרה, והתוצאה היא חוויה משותפת של “עשינו משהו ביחד”: לכידות כיתתית בעשרים שניות."},
+
+  {s:"charge", ty:"משחק חברתי", t:"מסתדרים בשורה",
+   d:"מסתדרים בשורה לפי הסדר שאבקש: לפי גובה, לפי סדר האלף־בית של השם הפרטי או שם המשפחה, לפי מספר האחים והאחיות, לפי תאריך יום ההולדת.",
+   len:"סבב אחד לכל קריטריון", sec:90,
+   p:"אתגר: להסתדר בלי מילה אחת: רק בסימני ידיים",
+   w:"שיתוף פעולה וגילוי מכנה משותף בין ילדים. גרסת השקט מוסיפה תקשורת לא־מילולית וויסות, ומשתקת את מי שרגיל להוביל בקול."},
+
+  {s:"calm", ty:"נשימה", t:"נשימת אצבעות",
+   d:"פורשים כף יד אחת מול הפנים. עם האצבע המורה של היד השנייה מטפסים לאט במעלה האצבע ויורדים במורד. בעלייה שואפים פנימה, בירידה נושפים החוצה. וכך על פני כל חמש האצבעות.",
+   len:"חמש אצבעות, חמש נשימות", sec:60,
+   w:"האצבע נותנת קצב חיצוני שמאט את הנשימה בלי לספור. זהו כלי אישי שילד יכול להפעיל לבד גם במבחן או ברגע של חרדה."},
+
+  {s:"calm", ty:"דמיון מודרך", t:"מכינים פיצה",
+   d:"יושבים על הרצפה בישיבה מזרחית. קודם מגלגלים את הבצק בשתי ידיים. אחר כך מורחים את הרוטב בתנועות סיבוביות רחבות. ואז מפזרים גבינה בקצות האצבעות מעל כל הפיצה.",
+   len:"עד שכל ילד בחר תוספת", sec:120,
+   p:"עוברים ילד־ילד: כל אחד בוחר תוספת, וכולם “מוסיפים” אותה לפיצה",
+   w:"דמיון מודרך בשילוב תנועה עדינה מוריד עוררות, ובחירת התוספות נותנת לכל ילד תרומה אישית ורגע של שייכות."},
+
+  {s:"calm", ty:"נשימה", t:"כדור הריכוז",
+   d:"עומדים או יושבים כשהרגליים צמודות. מצמידים כפות ידיים מול החזה. עכשיו מרחיקים את כפות הידיים זו מזו, אבל משאירים את קצות האצבעות נוגעות: נוצר ביניהן כדור. שואפים, והכדור מתנפח. נושפים, והכדור מתכווץ.",
+   len:"חמש נשימות", sec:60,
+   w:"לחץ קל בין קצות האצבעות נותן לקשב עוגן תחושתי, והדימוי של כדור שמתנפח ומתכווץ הופך את הנשימה למשהו שאפשר לראות."},
+  {s:"charge", ty:"תנועה למוזיקה", t:"ריקוד קפוא",
+   d:"אני משמיעה מוזיקה או מתופפת על השולחן, וכולם רוקדים או קופצים במקום. ברגע שהצליל נפסק: כולם קופאים במקום כמו פסלים.",
+   len:"ארבע עד שש קפיאות", sec:90,
+   p:"גרסת “פסלי שעווה”: ילד אחד הוא שומר המוזיאון. כשהוא מפנה את גבו כולם זזים, וכשהוא מסתובב כולם קופאים. מי שזז מצטרף לשומרים",
+   w:"הקפיאה הפתאומית דורשת עצירה של תנועה שכבר החלה: תרגול ישיר של עיכוב תגובה, ובאותה נשימה גם פורקן אנרגיה."},
+
+  {s:"charge", ty:"פעילות גופנית", t:"טיפוס הרים בכיתה",
+   d:"נעמדים במקום ומתחילים לטפס על הר: מרימים ברכיים גבוה ככל האפשר ומושיטים ידיים מעלה לסירוגין, בתנועות טיפוס מהירות.",
+   len:"עד שהנשימה מתגברת", sec:45,
+   w:"מפעיל את קבוצות השרירים הגדולות ומעלה את קצב הלב במהירות: הדרך הקצרה ביותר להעלות ערנות בכיתה כבדה."},
+
+  {s:"charge", ty:"ניעור", t:"שייקר שחרור מהיר",
+   d:"מנערים במהירות: שמונה פעמים יד ימין, שמונה יד שמאל, שמונה רגל ימין, שמונה רגל שמאל. ואז ארבע מכל אחת, ואז שתיים, ואז אחת. מסיימים בקפיצה ובקריאת “יש!”.",
+   len:"סדרה יורדת אחת: 8, 4, 2, 1", sec:45,
+   w:"הספירה היורדת נותנת מבנה ברור וסוף צפוי, כך שהניעור משחרר מתח שרירי בלי שהכיתה מאבדת מסגרת."},
+
+  {s:"charge", ty:"פריקה מבוקרת", t:"איגרוף צללים באוויר",
+   d:"עומדים בפישוק קל, ידיים בהגנה מול הפנים. עשרה אגרופים מהירים קדימה, עשרה מעלה לשמיים, ועשרה לצדדים. באוויר בלבד: לא נוגעים באיש.",
+   len:"שלוש סדרות של עשר", sec:45,
+   w:"נותן לדחף מוטורי ורגשי ערוץ פורקן גופני מבוקר ובטוח, במקום שיתפרץ בדרכים אחרות בכיתה."},
+
+  {s:"charge", ty:"מתיחה", t:"קטיף תפוחים בעננים",
+   d:"עולים על קצות האצבעות ומותחים יד אחת גבוה מאוד כדי לקטוף תפוח מענף דמיוני. מניחים אותו בסל שעל הרצפה, ומחליפים יד. עשרה תפוחים גבוהים.",
+   len:"עשרה קטיפים, לסירוגין", sec:45,
+   w:"מותח את עמוד השדרה ופותח את הכתפיים אחרי ישיבה רפויה, ומחזיר את היציבה לפני חזרה לכתיבה."},
+
+  {s:"calm", ty:"דמיון מודרך", t:"איש שלג נמס",
+   d:"עמדו זקופים ומתוחים כמו איש שלג קפוא ביער. עכשיו השמש זורחת ומחממת: המיסו לאט את הראש, אחר כך את הכתפיים, את הגב, את הברכיים: עד שאתם שלולית שקטה על הרצפה.",
+   len:"המסה אחת, איטית", sec:60,
+   w:"מלמד ילדים להבחין בין מתח שרירי נוקשה לבין שחרור מוחלט: הבחנה שהיא תנאי מקדים לכל תרגול הרפיה."},
+
+  {s:"calm", ty:"נשימה", t:"להריח פרח, לכבות נר",
+   d:"דמיינו שביד ימין אתם מחזיקים פרח ריחני, וביד שמאל נר דולק. שאיפה עמוקה מהאף כדי להריח את הפרח, ונשיפה עדינה וארוכה מהפה כדי לכבות את הנר.",
+   len:"חמש נשימות", sec:60,
+   w:"שני דימויים מוחשיים שמלמדים בבת אחת שאיפה עמוקה ונשיפה מוארכת, בלי להסביר לילד מהי נשימה סרעפתית."},
+
+  {s:"calm", ty:"קרקוע חושי", t:"קרקוע חמשת החושים",
+   d:"הביטו סביב בדממה וזהו לעצמכם: חמישה דברים שאתם רואים בחדר, ארבעה מרקמים שאתם יכולים לגעת בהם, שלושה צלילים ששומעים ברקע, שני ריחות באוויר, וטעם אחד בפה.",
+   len:"מעבר אחד על חמשת החושים", sec:90,
+   w:"טכניקת קרקוע שמחזירה את תשומת הלב מהמחשבות אל החושים. יעילה במיוחד לפני מבחן, או לילד שנמצא בהצפה."},
+
+  {s:"calm", ty:"שיווי משקל", t:"יציבת עץ איתן",
+   d:"נעמדים על רגל אחת ומניחים את כף הרגל השנייה על השוק, מתחת לברך. מצמידים כפות ידיים אל החזה ונושמים חמש נשימות יציבות בלי להתנדנד. עכשיו מחליפים רגל.",
+   len:"חמש נשימות לכל רגל", sec:60,
+   w:"שיווי משקל דורש ריכוז פנימי גבוה והשקטה של תנועות מיותרות: הגוף מכריח את הקשב להתאסף."},
+
+  {s:"focus", ty:"חציית קו אמצע", t:"הצלבות מוח",
+   d:"הרימו ברך ימין וגעו בה במרפק שמאל. עכשיו ברך שמאל ומרפק ימין. המשיכו בהצלבות בקצב הליכה מדויק ויציב.",
+   len:"עשרים הצלבות", sec:60,
+   p:"הקצב המדוד הוא העיקר: כשממהרים, ההצלבה מאבדת את הערך שלה",
+   w:"פעילות חוצת קו אמצע שמחייבת את שתי ההמיספרות לעבוד בתיאום, ודורשת תשומת לב מתמדת לאיזו יד פוגשת איזו ברך."},
+
+  {s:"focus", ty:"מעקב עיני", t:"שמונה עצל",
+   d:"הושיטו יד קדימה וציירו באוויר שמונה שוכב: סימן האינסוף. עקבו בעיניים בלבד אחרי קצה האצבע, בלי להזיז את הראש. חמש פעמים לכל כיוון, בנשימה עמוקה.",
+   len:"חמישה סיבובים לכל כיוון", sec:60,
+   w:"מחזק מעקב עיני חלק: אותה יכולת שמאפשרת לעבור ברצף משורה לשורה בקריאה ולעקוב אחרי הכתוב על הלוח."},
+
+  {s:"focus", ty:"משחק הוראות", t:"סיימון אומר הפוך",
+   d:"פועלים בדיוק הפוך מההוראה. אם אני אומרת “געו בראש”: נוגעים בבהונות. אם אני אומרת “קפצו”: כורעים ברך. מי שלא מתבלבל ממשיך.",
+   len:"עשר עד חמש־עשרה הוראות", sec:90,
+   w:"כדי להפוך הוראה צריך לעכב את התגובה האוטומטית ולבנות תגובה חלופית במקומה: עבודה ישירה של גמישות קוגניטיבית."},
+
+  {s:"focus", ty:"משחק חשבון", t:"ספירת באזז",
+   d:"סופרים יחד בסבב מאחת עד שלושים. בכל מספר שמתחלק בשלוש, או שיש בו את הספרה שלוש, אסור להגיד את המספר: מוחאים כף ואומרים “באזז!”.",
+   len:"סבב אחד עד שלושים", sec:90,
+   p:"נפלתם? מתחילים מאחת. אפשר גם להחליף את המספר הקסום לארבע או לחמש",
+   w:"מחייב להחזיק כלל בזיכרון העבודה תוך כדי חישוב מהיר והקשבה לתור: שלוש משימות במקביל, בעטיפה של משחק."},
+
+  {s:"focus", ty:"פיצול קשב", t:"ציור באוויר בשתי ידיים",
+   d:"הושיטו שתי ידיים קדימה. עכשיו נסו לצייר באוויר בו־זמנית: ביד ימין עיגול, וביד שמאל ריבוע. הצלחתם בלי שהצורות התערבבו זו בזו?",
+   len:"שלושה ניסיונות, ואז מחליפים ידיים", sec:45,
+   w:"ביצוע שתי מטלות מוטוריות שונות במקביל מאמן פיצול קשב, ובעיקר מייצר צחוק, כי כמעט אף אחד לא מצליח בפעם הראשונה."},
+
+  {s:"focus", ty:"שטף מילולי", t:"שרשרת מילים מקושרת",
+   d:"אני אומרת מילה, למשל “ים”. הילד הבא אומר מילה שמתקשרת אליה: “חול”. אחריו “ארמון”, אחריו “מלך”. שומרים על קצב ולא מתעכבים.",
+   len:"סבב אחד סביב הכיתה", sec:90,
+   w:"מרחיב את רשת האסוציאציות הלשוניות ומאיץ שליפה מהזיכרון הסמנטי: חימום מצוין לפני שיעור שפה או משימת כתיבה."},
+
+  {s:"connect", ty:"עבודה בזוגות", t:"מראה־מראה בזוגות",
+   d:"עומדים פנים אל פנים בזוגות. אחד מוביל בתנועות איטיות וחלקות: ידיים, הבעות פנים, והשני מחקה אותו במדויק, כמו בבואה במראה. אחרי חצי דקה מתחלפים.",
+   len:"חצי דקה לכל תפקיד", sec:90,
+   w:"כדי לחקות במדויק צריך לקרוא את הזולת בזמן אמת. זהו תרגול של התכווננות הדדית ותקשורת לא־מילולית: הבסיס של אמפתיה."},
+
+  {s:"connect", ty:"תנועה בחלל", t:"זה או זה?",
+   d:"אני שואלת שאלה מהירה: פיצה או גלידה? ים או בריכה? ספר או סרט?, וכל אחד עובר לעמוד בצד ימין או בצד שמאל של החדר לפי הבחירה שלו.",
+   len:"חמש עד שבע שאלות", sec:90,
+   p:"מדי פעם עוצרים ושואלים ילד אחד למה בחר: זה הופך את המשחק לשיחה",
+   w:"מחבר תנועה פיזית לביטוי העדפה אישית, וילדים מגלים תוך שניות מי חושב כמוהם: קיצור דרך להיכרות חברתית."},
+
+  {s:"connect", ty:"סנכרון קבוצתי", t:"סופת גשם כיתתית",
+   d:"מתחילים בשפשוף כפות ידיים: רוח קלה. עוברים להקשה של אצבע אחת על כף היד: הטיפות הראשונות. שתי אצבעות. מחיאות כפיים מלאות: מבול. תיפוף ברגליים: רעמים. ואז חוזרים לאחור, שלב אחר שלב, עד לשקט.",
+   len:"עלייה לשיא וירידה חזרה", sec:90,
+   w:"הקבוצה נעה יחד בעלייה ובירידה מבוקרת. הסיום השקט הוא העיקר: הכיתה מגיעה לשיא ויוצאת ממנו רגועה."},
+
+  {s:"connect", ty:"פנטומימה", t:"החבילה הבלתי נראית",
+   d:"ילד אחד מעביר חבילה דמיונית לחברו. לפני המסירה הוא מראה בתנועות הגוף מה אופייה: כבדה כמו סלע, רותחת כמו מחבת, קופצנית כמו גור כלבים, או קלילה כמו נוצה.",
+   len:"סבב אחד סביב המעגל", sec:90,
+   w:"מפעיל דמיון והבעה גופנית, ומחייב את המקבל לקרוא רמזים פיזיים לפני שהוא מגיב: הקשבה בלי מילים."},
+
+  {s:"connect", ty:"אקלים כיתתי", t:"פינג־פונג מחמאות",
+   d:"פנו אל הילד או הילדה שלידכם, ותנו מחמאה אחת אמיתית על משהו שראיתם היום: עזרה לחבר, השתתפות בשיעור, חיוך בבוקר.",
+   len:"מחמאה אחת לכל כיוון", sec:60,
+   p:"חשוב שהמחמאה תהיה על מעשה ולא על מראה חיצוני",
+   w:"מחזק אקלים כיתתי חיובי ותחושת שייכות, ומאמן ילדים לשים לב לטוב אצל האחר ולנסח אותו במילים."},
+
+  {s:"connect", ty:"משחק צחוק", t:"תחרות פני פוקר",
+   d:"עומדים בזוגות ומביטים זה לזה בעיניים ברצינות תהומית. מותר לעשות פרצופים משונים, אבל אסור לחייך או להוציא הגה. הראשון שצוחק מעניק נקודה לשני.",
+   len:"שני סיבובים קצרים", sec:60,
+   w:"צחוק משותף משחרר מתח מהר מכל תרגיל נשימה, והמאמץ לשמור על פנים רציניות הוא בעצמו תרגול של שליטה עצמית."},
+
+  {s:"connect", ty:"יצירה משותפת", t:"סיפור במילה אחת",
+   d:"יושבים במעגל ובונים סיפור יחד. כל אחד בתורו מוסיף מילה אחת בלבד שמקדמת את העלילה: “אתמול”… “הלך”… “דינוזאור”… “למכולת”…",
+   len:"סבב אחד, או עד שהסיפור נגמר", sec:90,
+   w:"מחייב הקשבה דרוכה למה שנאמר רגע לפניך, וויתור על הסיפור שתכננת בראש: שיתוף פעולה בצורתו הזעירה ביותר."},
+
+  {s:"connect", ty:"שבירת שגרה", t:"טלפתיה של צבעים",
+   d:"כל אחד חושב בשקט על צבע אחד. בספירה שלי עד שלוש: כולם צועקים את הצבע שלהם יחד. נראה כמה מאיתנו שידרו על אותו הגל.",
+   len:"שניים־שלושה סיבובים", sec:45,
+   w:"רגע קצר של הפתעה וצחוק משותף. אין כאן מטרה קוגניטיבית: המטרה היא לשבור את השגרה ולייצר תחושת “ביחד”."}
+
+];
+
+const two = n => String(n).padStart(2,"0");
+const mmss = s => `${two(Math.floor(s/60))}:${two(s%60)}`;
+function stepsOf(t){
+  const raw = t.split(/(?<=[.!?])\s+/).map(x => x.trim()).filter(Boolean);
+  const out = [];
+  for (const part of raw){
+    // קטעים קצרצרים כמו "עיגול." או "ושוב." אינם שלב בפני עצמו
+    if (part.length < 16 && out.length) out[out.length - 1] += " " + part;
+    else out.push(part);
+  }
+  return out;
+}
+let filter = null, current = 0;
+
+/* ---------- tabs ---------- */
+const TABS = ["how", "one", "all", "about"];
+function selectTab(which){
+  TABS.forEach(t => {
+    document.getElementById("tab-" + t).setAttribute("aria-selected", String(t === which));
+    document.getElementById("view-" + t).hidden = (t !== which);
+  });
+}
+TABS.forEach(t => document.getElementById("tab-" + t).onclick = () => selectTab(t));
+
+/* ---------- what each state is for ---------- */
+const STATE_WHY = {
+  calm:   "כשהכיתה מוצפת, רועשת או אחרי אירוע טעון. מוריד עוררות ומחזיר שליטה בגוף.",
+  focus:  "כשהקשב התפזר אבל האנרגיה בסדר. מאסף את תשומת הלב חזרה למשימה.",
+  charge: "כשהכיתה כבדה, עייפה או אחרי ישיבה ארוכה. מעלה זרימת דם וערנות.",
+  connect:"כשהאווירה החברתית עכורה, או בתחילת שבוע. מחזק שייכות וקשר בין הילדים."
+};
+const sg = document.getElementById("statesGuide");
+for (const k in STATES){
+  const el = document.createElement("article");
+  el.className = "stateCard";
+  el.style.setProperty("--c", `var(${STATES[k].v})`);
+  el.innerHTML = `<h4>${STATES[k].name}</h4><p>${STATE_WHY[k]}</p>
+    <span class="cnt">${CARDS.filter(c => c.s === k).length} כרטיסים</span>`;
+  sg.appendChild(el);
+}
+document.getElementById("printBtn").onclick = () => window.print();
+
+/* ---------- picker ---------- */
+const picker = document.getElementById("picker");
+const scopeEl = document.getElementById("scope");
+
+function renderPicker(){
+  picker.innerHTML = "";
+
+  const sh = document.createElement("button");
+  sh.className = "shuffle";
+  sh.textContent = "הגרל כרטיס";
+  sh.onclick = draw;
+  picker.appendChild(sh);
+
+  const div = document.createElement("span");
+  div.className = "divider";
+  picker.appendChild(div);
+
+  for (const s in STATES){
+    const b = document.createElement("button");
+    b.className = "chip";
+    b.style.setProperty("--c", `var(${STATES[s].v})`);
+    b.setAttribute("aria-pressed", String(s === filter));
+    b.innerHTML = `<span class="sw"></span>${STATES[s].name} <span class="n">${CARDS.filter(c => c.s === s).length}</span>`;
+    b.onclick = () => {
+      filter = (filter === s) ? null : s;
+      bag = [];
+      renderPicker();
+      if (!pool().includes(current)) draw(); else scope();
+    };
+    picker.appendChild(b);
+  }
+  scope();
+}
+function scope(){
+  scopeEl.textContent = filter
+    ? `ההגרלה כרגע מוגבלת ל־${pool().length} כרטיסים שנועדו ${STATES[filter].name}. לחיצה נוספת על הכפתור מבטלת את הסינון.`
+    : `ההגרלה כרגע מכל ${CARDS.length} הכרטיסים. אפשר להגביל אותה לפי מצב.`;
+}
+const pool = () => CARDS.map((c,i)=>i).filter(i => !filter || CARDS[i].s === filter);
+
+/* ---------- the card ---------- */
+const stage = document.getElementById("stage");
+const card  = document.getElementById("card");
+
+function stepsHTML(d){
+  const st = stepsOf(d);
+  return st.length >= 2
+    ? `<ol class="steps">${st.map(x => `<li>${x}</li>`).join("")}</ol>`
+    : `<p class="steps">${d}</p>`;
+}
+
+function show(i){
+  current = i;
+  const c = CARDS[i], st = STATES[c.s], p = pool();
+  document.documentElement.style.setProperty("--k", `var(${st.v})`);
+  card.innerHTML = `
+    <div class="card-top">
+      <div class="tags">
+        <span class="num">כרטיס ${two(i+1)}</span>
+        <span class="state">${st.badge}</span>
+        <span class="type">${c.ty}</span>
+      </div>
+      <span class="idx">${i < WAT_COUNT ? "We Are Teachers" : "&nbsp;"}</span>
+    </div>
+    <h2>${c.t}</h2>
+    <div class="sheet">
+      <div class="stripe">
+        <span>משך: ${c.len}</span>
+        ${c.g ? `<span>צריך: ${c.g}</span>` : ""}
+      </div>
+      ${stepsHTML(c.d)}
+      <div class="extra">
+        ${c.p ? `<div class="plus"><b>עוד רעיון</b><span>${c.p}</span></div>` : ""}
+        <details class="why"><summary>למה זה עובד</summary><p>${c.w}</p></details>
+      </div>
+    </div>`;
+  card.classList.remove("flip"); void card.offsetWidth; card.classList.add("flip");
+  resetTimer();
+  setChosen(c.sec);
+  const posEl = document.getElementById("pos");
+  if (posEl) posEl.textContent = `${p.indexOf(i)+1} מתוך ${p.length}`;
+  scope();
+}
+/* חפיסה אמיתית: כל הכרטיסים יוצאים פעם אחת לפני שמתחילים סיבוב חדש */
+let bag = [];
+function refillBag(){
+  bag = pool().filter(i => i !== current);
+  for (let i = bag.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [bag[i], bag[j]] = [bag[j], bag[i]];
+  }
+}
+function draw(){
+  if (!bag.length) refillBag();
+  const next = bag.pop();
+  show(next !== undefined ? next : pool()[0]);
+}
+function go(delta){
+  const p = pool();
+  if (!p.length) return;
+  const at = p.indexOf(current);
+  show(p[(at + delta + p.length) % p.length]);
+}
+
+/* ---------- printable pages: four cards per A4 sheet ---------- */
+const SITE_URL = "https://garbym-create.github.io/hafsakot-moah/";
+let QR_SRC = "";
+try{
+  QR_SRC = new QRious({value: SITE_URL, size: 420, level: "M", padding: 8}).toDataURL("image/png");
+}catch(e){ QR_SRC = ""; }
+
+const pagesEl = document.getElementById("pages");
+for (let start = 0; start < CARDS.length; start += 4){
+  const page = document.createElement("section");
+  page.className = "page";
+  CARDS.slice(start, start + 4).forEach((c, j) => {
+    const i = start + j, st = STATES[c.s], steps = stepsOf(c.d);
+    const el = document.createElement("article");
+    el.className = "pcard";
+    el.style.setProperty("--c", `var(${st.v})`);
+    el.innerHTML = `
+      <div class="pc-top">
+        <span class="pc-num">${two(i+1)}</span>
+        <span class="pc-state">${st.badge}</span>
+        <span class="pc-type">${c.ty}</span>
+      </div>
+      <h3>${c.t}</h3>
+      <p class="pc-meta">משך: ${c.len}${c.g ? ` · צריך: ${c.g}` : ""}</p>
+      ${steps.length >= 2
+        ? `<ol>${steps.map(x => `<li>${x}</li>`).join("")}</ol>`
+        : `<p class="pline">${c.d}</p>`}
+      ${c.p ? `<p class="pc-plus"><b>עוד רעיון</b> ${c.p}</p>` : ""}
+      <p class="pc-why"><b>למה זה עובד</b> ${c.w}</p>
+      <div class="pc-foot">
+        <div class="txt">
+          <p class="pc-scan">סרקו לכל 43 הכרטיסים</p>
+          <p class="pc-src">${i < WAT_COUNT ? "We Are Teachers · Brain Breaks Cards" : "&nbsp;"}</p>
+        </div>
+        <img class="qr" src="${QR_SRC}" alt="קוד QR לאתר הפסקות מוח"${QR_SRC ? "" : " hidden"}>
+      </div>`;
+    page.appendChild(el);
+  });
+  pagesEl.appendChild(page);
+}
+
+/* ---------- join the community ---------- */
+const WA_LINK = "https://wa.me/message/VEBSRBKH4WT7M1";
+const joinBtn = document.getElementById("joinBtn");
+if (WA_LINK){
+  joinBtn.href = WA_LINK;
+  joinBtn.hidden = false;
+}
+
+/* ---------- a soft chime when the time is up ---------- */
+const bellBtn = document.getElementById("bell");
+let soundOn = true;
+try { soundOn = localStorage.getItem("hm-sound") !== "off"; } catch(e){}
+bellBtn.setAttribute("aria-pressed", String(soundOn));
+bellBtn.textContent = soundOn ? "🔔" : "🔕";
+bellBtn.onclick = () => {
+  soundOn = !soundOn;
+  bellBtn.setAttribute("aria-pressed", String(soundOn));
+  bellBtn.textContent = soundOn ? "🔔" : "🔕";
+  try { localStorage.setItem("hm-sound", soundOn ? "on" : "off"); } catch(e){}
+  if (soundOn) chime();
+};
+
+let actx = null;
+function note(ctx, freq, startAt, dur, peak){
+  const osc = ctx.createOscillator(), gain = ctx.createGain();
+  osc.type = "sine";
+  osc.frequency.setValueAtTime(freq, startAt);
+  gain.gain.setValueAtTime(0.0001, startAt);
+  gain.gain.exponentialRampToValueAtTime(peak, startAt + 0.02);
+  gain.gain.exponentialRampToValueAtTime(0.0001, startAt + dur);
+  osc.connect(gain).connect(ctx.destination);
+  osc.start(startAt);
+  osc.stop(startAt + dur + 0.05);
+}
+/* שני צלילים רכים, כמו פעמון קטן. בלי חדות ובלי בהלה. */
+function chime(){
+  if (!soundOn) return;
+  try {
+    actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+    if (actx.state === "suspended") actx.resume();
+    const t = actx.currentTime + 0.02;
+    note(actx, 784.0, t,        1.6, 0.16);   // סול
+    note(actx, 1174.7, t,       1.6, 0.07);   // הרמוניה שקטה מעליו
+    note(actx, 1046.5, t + 0.22, 1.8, 0.13);  // דו, חצי פעימה אחריו
+  } catch(e){}
+}
+
+/* ---------- timer ---------- */
+const clock = document.getElementById("clock");
+const bbClock = document.getElementById("bbClock");
+const bbTimer = document.getElementById("bbTimer");
+const tchips = [...document.querySelectorAll(".tchip")];
+const PRESETS = tchips.map(b => +b.dataset.sec);
+let chosen = 60, left = 0, iv = null;
+
+/* the card's own length, rounded up to the nearest preset */
+function setChosen(sec){
+  chosen = PRESETS.find(v => v >= sec) ?? PRESETS[PRESETS.length - 1];
+  tchips.forEach(b => b.classList.toggle("rec", +b.dataset.sec === chosen));
+}
+function clearRunning(){ tchips.forEach(b => b.setAttribute("aria-pressed", "false")); }
+
+const pauseBtn = document.getElementById("pause");
+const paint = () => { clock.textContent = bbClock.textContent = mmss(Math.max(left, 0)); };
+
+function tick(){
+  iv = setInterval(() => {
+    left--; paint();
+    if (left <= 0){
+      clearInterval(iv); iv = null; clearRunning();
+      clock.textContent = bbClock.textContent = "סיימנו";
+      pauseBtn.hidden = true;
+      if (bbTimer) bbTimer.textContent = "הפעל טיימר";
+      chime();
+    }
+  }, 1000);
+}
+function resetTimer(){
+  clearInterval(iv); iv = null; left = 0;
+  clock.textContent = bbClock.textContent = "--:--";
+  clock.classList.remove("run");
+  clearRunning();
+  pauseBtn.hidden = true;
+  pauseBtn.textContent = "השהיה";
+  if (bbTimer) bbTimer.textContent = "הפעל טיימר";
+}
+function start(sec, btn){
+  resetTimer();
+  left = sec; clock.classList.add("run");
+  if (btn) btn.setAttribute("aria-pressed", "true");
+  paint();
+  pauseBtn.hidden = false;
+  pauseBtn.textContent = "השהיה";
+  if (bbTimer) bbTimer.textContent = "השהיה";
+  tick();
+}
+function togglePause(){
+  if (!left) return;
+  if (iv){
+    clearInterval(iv); iv = null;
+    pauseBtn.textContent = "המשך";
+    if (bbTimer) bbTimer.textContent = "המשך";
+    clock.classList.remove("run");
+  } else {
+    clock.classList.add("run");
+    pauseBtn.textContent = "השהיה";
+    if (bbTimer) bbTimer.textContent = "השהיה";
+    tick();
+  }
+}
+tchips.forEach(b => b.onclick = () => start(+b.dataset.sec, b));
+pauseBtn.onclick = togglePause;
+document.getElementById("stop").onclick = resetTimer;
+
+/* ---------- projection mode ---------- */
+const beambar = document.getElementById("beambar");
+function setBeam(on){
+  if (!on) resetTimer();
+  document.body.classList.toggle("beaming", on);
+  beambar.hidden = !on;
+  if (on && document.documentElement.requestFullscreen)
+    document.documentElement.requestFullscreen().catch(() => {});
+  else if (!on && document.fullscreenElement)
+    document.exitFullscreen().catch(() => {});
+}
+document.getElementById("beam").onclick = () => setBeam(true);
+document.getElementById("bbClose").onclick = () => setBeam(false);
+document.getElementById("bbDraw").onclick = draw;
+document.getElementById("bbPrev").onclick = () => go(-1);
+document.getElementById("bbNext").onclick = () => go(1);
+bbTimer.onclick = () => left ? togglePause() : start(chosen, tchips.find(b => +b.dataset.sec === chosen));
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && document.body.classList.contains("beaming")) setBeam(false);
+  if (!document.body.classList.contains("beaming")) return;
+  if (e.key === " "){ e.preventDefault(); draw(); }
+  if (e.key === "ArrowLeft"){ e.preventDefault(); go(1); }
+  if (e.key === "ArrowRight"){ e.preventDefault(); go(-1); }
+});
+document.getElementById("stop").onclick = resetTimer;
+
+document.getElementById("prev").onclick = () => go(-1);
+document.getElementById("next").onclick = () => go(1);
+
+renderPicker();
+show(Math.floor(Math.random()*CARDS.length));
+</script>
